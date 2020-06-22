@@ -25,6 +25,9 @@ jobs:
 #     - name: Get Changed Files
 #       uses: lots0logs/gh-action-get-changed-files@2.1.4
 
+    - name: List files
+      run: ls -lh
+
     - name: Merge files
       run: cat 1.txt 2.txt > hello.txt
 
