@@ -21,7 +21,6 @@ jobs:
 
     - name: Test modified
       id: test_modified
-      outputs: 
       run: |
         if [ "$(git diff hello.txt)" != "" ]; then
           echo "##[set-output name=changed;]$(echo 1)"
