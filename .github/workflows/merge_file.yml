@@ -31,16 +31,12 @@ jobs:
     - name: Merge files
       run: |
         cat 1.txt 2.txt > hello.txt
-    
-    - name: Diff files
-      run: |
-        /usr/bin/git diff hello.txt
 
     - name: Commit files
       run: |
         /usr/bin/git config --local user.email "action@github.com"
         /usr/bin/git config --local user.name "GitHub Action"
-        if /usr/bin/git diff hello.txt > /dev/null; then CHANGED=1 && /usr/bin/git add hello.txt && /usr/bin/git commit -m "Merge files"; fi
+        if [ "$(/usr/bin/git diff hello.txt)" != "" ]; then CHANGED=1 && /usr/bin/git add hello.txt && /usr/bin/git commit -m "Merge files"; fi
     
     - name: Push changes
       env:
