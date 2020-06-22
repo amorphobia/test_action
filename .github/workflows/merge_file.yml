@@ -34,16 +34,16 @@ jobs:
     
     - name: Diff files
       run: |
-        git diff hello.txt
+        /usr/bin/git diff hello.txt
 
     - name: Commit files
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        if git diff hello.txt > /dev/null; then CHANGED=1 && git add hello.txt && git commit -m "Merge files"; fi
+        /usr/bin/git config --local user.email "action@github.com"
+        /usr/bin/git config --local user.name "GitHub Action"
+        if /usr/bin/git diff hello.txt > /dev/null; then CHANGED=1 && /usr/bin/git add hello.txt && /usr/bin/git commit -m "Merge files"; fi
     
     - name: Push changes
       env:
         github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        if [ "$CHANGED" -eq "1" ]; then git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master; fi
+        if [ "$CHANGED" -eq "1" ]; then /usr/bin/git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master; fi
