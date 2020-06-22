@@ -37,13 +37,21 @@ jobs:
     
     - name: test
       run: |
+        echo "cat files.json"
         cat $HOME/files.json
+        echo "cat files_modified.json"
         cat $HOME/files_modified.json
+        echo "cat files_added.json"
         cat $HOME/files_added.json
+        echo "cat files_removed.json"
         cat $HOME/files_removed.json
+        echo "echo files"
         echo '${{ steps.file_changes.outputs.files}}'
+        echo "echo files_modified"
         echo '${{ steps.file_changes.outputs.files_modified}}'
+        echo "echo files_added"
         echo '${{ steps.file_changes.outputs.files_added}}'
+        echo "echo files_removed"
         echo '${{ steps.file_changes.outputs.files_removed}}'
 
     - name: Commit files
