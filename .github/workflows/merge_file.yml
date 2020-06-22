@@ -31,6 +31,9 @@ jobs:
     - name: Merge files
       run: |
         cat 1.txt 2.txt > hello.txt
+    
+    - name: Diff files
+      run: |
         git diff hello.txt
 
     - name: Commit files
