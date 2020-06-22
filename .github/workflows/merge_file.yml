@@ -36,19 +36,23 @@ jobs:
       uses: trilom/file-changes-action@v1.2.3
     
     - name: test
+      id: test_modified
       run: |
         cat $HOME/files_modified.json
-        if [ "$(cat $HOME/files_modified.json | grep hello.txt)" != "" ]; then echo '::set-env CHANGED=1'; fi
+        if [ "$(cat $HOME/files_modified.json | grep hello.txt)" != "" ]; then
+          echo '::set-output changed=1'
+        fi
 
     - name: Commit files
+      if: ${{ steps.test_modified.outputs.changed == '1' }}
       run: |
         /usr/bin/git config --local user.email "action@github.com"
         /usr/bin/git config --local user.name "GitHub Action"
-        if [ "$CHANGE" -eq "1" ]; /usr/bin/git add hello.txt && /usr/bin/git commit -m "Merge files"; fi
+        /usr/bin/git add hello.txt && /usr/bin/git commit -m "Merge files"
     
     - name: Push changes
+      if: ${{ steps.test_modified.outputs.changed == '1' }}
       env:
         github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo $CHANGED
-        if [ "$CHANGED" -eq "1" ]; then /usr/bin/git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master; fi
+        /usr/bin/git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master
