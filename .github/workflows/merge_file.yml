@@ -42,4 +42,5 @@ jobs:
       env:
         github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        echo $CHANGED
         if [ "$CHANGED" -eq "1" ]; then /usr/bin/git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master; fi
