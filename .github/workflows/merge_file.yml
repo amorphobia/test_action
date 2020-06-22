@@ -31,7 +31,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git conmmit -m "Merge files" -a
+        git commit -m "Merge files" -a
     
     - name: Push changes
       env:
