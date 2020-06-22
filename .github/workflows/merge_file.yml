@@ -32,11 +32,10 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add hello.txt
-        git commit -m "Merge files"
+        if git diff hello.txt > /dev/null; then CHANGED=1 && git add hello.txt && git commit -m "Merge files"; fi
     
     - name: Push changes
       env:
         github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master;
+        if [ "$CHANGED" -eq "1" ]; then git push "https://${github_token}@github.com/amorphobia/test_action.git" HEAD:master; fi
