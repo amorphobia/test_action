@@ -39,6 +39,9 @@ jobs:
     
     - name: test
       run: |
+        cat $HOME/files_modified.csv
+        echo "json"
+        cat $HOME/files_modified.json
         if [ "$(cat $HOME/files_modified.csv | grep hello.txt)" != "" ]; then echo '::set-env CHANGED=1'; fi
 
     - name: Commit files
