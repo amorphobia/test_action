@@ -34,15 +34,11 @@ jobs:
         
     - id: file_changes
       uses: trilom/file-changes-action@v1.2.3
-      with:
-        fileOutput: 'csv'
     
     - name: test
       run: |
-        cat $HOME/files_modified.csv
-        echo "json"
         cat $HOME/files_modified.json
-        if [ "$(cat $HOME/files_modified.csv | grep hello.txt)" != "" ]; then echo '::set-env CHANGED=1'; fi
+        if [ "$(cat $HOME/files_modified.json | grep hello.txt)" != "" ]; then echo '::set-env CHANGED=1'; fi
 
     - name: Commit files
       run: |
