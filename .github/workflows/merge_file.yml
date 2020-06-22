@@ -13,7 +13,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: List files
-      run: ls -lh
+      run: |
+        ls -lh
+        echo $GITHUB_ACTOR
+        echo $GITHUB_REPOSITORY
 
     - name: Merge files
       run: |
